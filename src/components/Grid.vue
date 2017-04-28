@@ -45,6 +45,29 @@
             ],
           }
         }
+        computed: {
+          nonActivePlayer() {
+            if (this.activePlayer === '0') {
+              return 'X';
+            }
+              return 'O';
+          }
+        }
+
+        created() {
+          Event.$on('Strike', (cellNumber) => {
+            this.cells[cellNumber] = this.activePlayer
+            this.moves++
+            this.mageStatus = this.changeGameStatus()
+            this.changePlayer()
+          })
+        }
+
+        methods: {
+          changePlayer() {
+            this.activePlayer = this.nonActivePLayer
+          },
+        }
     }
 
 </script>
